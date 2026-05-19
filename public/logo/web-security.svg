@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <path d="M32 8 L32 8 L56 20 V44 L32 56 L8 44 V20Z" fill="#4A90D9" stroke="#2D6EB5" stroke-width="2"/>
+  <path d="M32 20 L32 20 L44 26 V38 L32 44 L20 38 V26Z" fill="white" opacity="0.3"/>
+  <text x="32" y="38" text-anchor="middle" fill="white" font-size="16" font-family="monospace" font-weight="bold">W</text>
+</svg>
