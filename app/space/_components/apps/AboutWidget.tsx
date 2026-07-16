@@ -4,15 +4,14 @@ import { SOCIAL_LINKS } from '@/lib/data';
 export default function AboutWidget() {
     return (
         <div className="ox-about">
-            <div className="ox-about-logo">0xLinux</div>
-            <div className="ox-about-version">Version 1.0.0</div>
+            <div className="ox-about-logo">Arch Linux</div>
+            <div className="ox-about-version">WM: Hyprland | Theme: Catppuccin</div>
             <div className="ox-about-desc">
-                An interactive Linux desktop experience built by{' '}
-                <span style={{ color: '#00ff41' }}>0xMaruF</span>.
+                An interactive Arch Linux & Hyprland desktop experience built by{' '}
+                <span style={{ color: 'var(--blue)' }}>0xMaruF</span>.
                 <br />
                 <br />
-                Inspired by Arch Linux and Kali Linux. This is a simulated
-                desktop environment running inside your browser.
+                A simulation of a perfectly riced workspace running inside your browser.
             </div>
             <div
                 style={{
@@ -42,7 +41,7 @@ export default function AboutWidget() {
                 style={{
                     fontFamily: 'var(--font-jetbrains-mono), monospace',
                     fontSize: 10,
-                    color: 'rgba(255,255,255,0.2)',
+                    color: 'var(--overlay0)',
                     marginTop: '0.5rem',
                 }}
             >

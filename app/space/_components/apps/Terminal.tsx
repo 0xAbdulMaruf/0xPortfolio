@@ -2,12 +2,25 @@
 import { useState, useRef, useEffect, useCallback, KeyboardEvent } from 'react';
 import { MY_STACK, MY_EXPERIENCE, CVE_LIST } from '@/lib/data';
 
-const NEOFETCH_ASCII = `   ██████╗ ██╗  ██╗
-  ██╔═████╗╚██╗██╔╝
-  ██║██╔██║ ╚███╔╝ 
-  ████╔╝██║ ██╔██╗ 
-  ╚██████╔╝██╔╝ ██╗
-   ╚═════╝ ╚═╝  ╚═╝`;
+const NEOFETCH_ASCII = `                   -\`
+                  .o+\`
+                 \`ooo/
+                \`+oooo:
+               \`+oooooo:
+               -+oooooo+:
+             \`/:-:++oooo+:
+            \`/++++/+++++++:
+           \`/++++++++++++++:
+          \`/+++ooooooooooooo/\`
+         ./ooosssso++osssssso+\`
+        .oossssso-\`\`\`\`/ossssss+\`
+       -osssssso.      :ssssssso.
+      :osssssss/        osssso+++.
+     /ossssssss/        +ssssooo/-
+   \`/ossssso+/:-        -:/+osssso+-
+  \`+sso+:-\`                 \`.-/+oso:
+ \`++:.                           \`-/+/
+ .\`                                 \``;
 
 interface TerminalLine {
     type: 'input' | 'output';
@@ -17,7 +30,7 @@ interface TerminalLine {
 
 export default function Terminal() {
     const [lines, setLines] = useState<TerminalLine[]>([
-        { type: 'output', content: '0xLinux v1.0 — Terminal Emulator' },
+        { type: 'output', content: 'Arch Linux x86_64' },
         { type: 'output', content: 'Type "help" for available commands.\n' },
     ]);
     const [input, setInput] = useState('');
@@ -70,7 +83,7 @@ export default function Terminal() {
                     return [new Date().toString()];
 
                 case 'uname':
-                    return ['0xLinux 6.6.6-0xmaruf x86_64 GNU/0xLinux'];
+                    return ['Linux archlinux 6.6.6-arch1-1 x86_64 GNU/Linux'];
 
                 case 'ls': {
                     const dir = parts[1] || '';
@@ -151,15 +164,19 @@ export default function Terminal() {
                         '___NEOFETCH_START___',
                         NEOFETCH_ASCII,
                         '___NEOFETCH_SEPARATOR___',
-                        `OS: 0xLinux v1.0`,
+                        `0xmaruf@archlinux`,
+                        `-----------------`,
+                        `OS: Arch Linux x86_64`,
                         `Host: 0xMaruF's Portfolio`,
-                        `Kernel: 6.6.6-0xmaruf`,
+                        `Kernel: 6.6.6-arch1-1`,
                         `Uptime: ${mins}m ${secs}s`,
-                        `Shell: 0xTerm v1.0`,
-                        `Terminal: 0xTerm`,
-                        `CPU: 0xProcessor™ @ 4.2GHz`,
-                        `Memory: 1337MB / 16384MB`,
-                        `Theme: Hacker Green [Dark]`,
+                        `Packages: 1337 (pacman)`,
+                        `Shell: zsh 5.9`,
+                        `WM: Hyprland`,
+                        `Terminal: kitty`,
+                        `CPU: AMD Ryzen 9 5900X (24) @ 4.8GHz`,
+                        `Memory: 1337MiB / 16384MiB`,
+                        `Theme: Catppuccin Mocha [Dark]`,
                         '___NEOFETCH_END___',
                     ];
                 }
@@ -197,7 +214,7 @@ export default function Terminal() {
 
                 default:
                     return [
-                        `bash: ${command}: command not found`,
+                        `zsh: command not found: ${command}`,
                         'Type "help" for available commands.',
                     ];
             }
@@ -274,10 +291,12 @@ export default function Terminal() {
         if (line.type === 'input') {
             return (
                 <div key={i} className="ox-terminal-line">
-                    <span className="prompt">0xmaruf</span>
-                    <span style={{ color: '#666' }}>@</span>
-                    <span className="path">0xlinux</span>
-                    <span style={{ color: '#666' }}>:~$ </span>
+                    <span className="prompt-user">0xmaruf</span>
+                    <span className="prompt-at">@</span>
+                    <span className="prompt-host">archlinux</span>
+                    <span className="prompt-char"> </span>
+                    <span className="prompt-path">~</span>
+                    <span className="prompt-char"> $ </span>
                     <span className="command">{line.content}</span>
                 </div>
             );
@@ -324,6 +343,10 @@ export default function Terminal() {
                         </div>
                         <div className="neofetch-info">
                             {infoLines.map((l, j) => {
+                                // For the "0xmaruf@archlinux" and "-------------" lines
+                                if (!l.includes(': ')) {
+                                    return <div key={j} className="label" style={{ color: 'var(--blue)' }}>{l}</div>;
+                                }
                                 const [label, ...rest] = l.split(': ');
                                 const value = rest.join(': ');
                                 return (
@@ -357,10 +380,12 @@ export default function Terminal() {
         >
             {renderLines()}
             <div className="ox-terminal-input-line">
-                <span className="prompt">0xmaruf</span>
-                <span style={{ color: '#666' }}>@</span>
-                <span className="path">0xlinux</span>
-                <span style={{ color: '#666' }}>:~$ </span>
+                <span className="prompt-user">0xmaruf</span>
+                <span className="prompt-at">@</span>
+                <span className="prompt-host">archlinux</span>
+                <span className="prompt-char"> </span>
+                <span className="prompt-path">~</span>
+                <span className="prompt-char"> $ </span>
                 <input
                     ref={inputRef}
                     className="ox-terminal-input"

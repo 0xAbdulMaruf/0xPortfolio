@@ -54,6 +54,7 @@ export default function Window({
                 if (!isDragging.current) return;
                 setPos({
                     x: ev.clientX - dragOffset.current.x,
+                    // Prevent dragging above top edge
                     y: Math.max(0, ev.clientY - dragOffset.current.y),
                 });
             };
@@ -82,7 +83,7 @@ export default function Window({
                 left: maximized ? 0 : pos.x,
                 top: maximized ? 0 : pos.y,
                 width: maximized ? '100vw' : size.w,
-                height: maximized ? 'calc(100vh - 42px)' : size.h,
+                height: maximized ? 'calc(100vh - 48px)' : size.h, // Space for bottom taskbar
                 zIndex,
             }}
             onMouseDown={onFocus}
@@ -92,32 +93,39 @@ export default function Window({
                 onMouseDown={handleTitleBarMouseDown}
                 onDoubleClick={handleMaximize}
             >
-                <span className="ox-window-title">
+                <div className="ox-window-title">
                     <span className="ox-window-title-icon">{icon}</span>
                     {title}
-                </span>
+                </div>
+                {/* Windows 11 style right-aligned controls */}
                 <div className="ox-window-controls">
                     <button
-                        className="ox-window-btn minimize"
+                        className="ox-window-btn"
                         onClick={(e) => {
                             e.stopPropagation();
                             onMinimize();
                         }}
-                    />
+                    >
+                        —
+                    </button>
                     <button
-                        className="ox-window-btn maximize"
+                        className="ox-window-btn"
                         onClick={(e) => {
                             e.stopPropagation();
                             handleMaximize();
                         }}
-                    />
+                    >
+                        □
+                    </button>
                     <button
                         className="ox-window-btn close"
                         onClick={(e) => {
                             e.stopPropagation();
                             onClose();
                         }}
-                    />
+                    >
+                        ×
+                    </button>
                 </div>
             </div>
             <div className="ox-window-body">{children}</div>

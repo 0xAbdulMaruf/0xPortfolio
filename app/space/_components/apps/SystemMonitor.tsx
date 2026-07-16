@@ -1,17 +1,17 @@
 'use client';
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const PROCESSES = [
     { pid: 1, name: 'systemd', cpu: '0.1' },
-    { pid: 142, name: 'nginx', cpu: '1.2' },
-    { pid: 256, name: 'metasploit', cpu: '4.8' },
-    { pid: 301, name: 'burpsuite', cpu: '8.3' },
-    { pid: 412, name: 'nmap-scanner', cpu: '2.1' },
-    { pid: 503, name: 'python3.11', cpu: '3.4' },
-    { pid: 610, name: 'tor', cpu: '1.7' },
-    { pid: 722, name: 'wireshark', cpu: '5.2' },
-    { pid: 834, name: 'hashcat', cpu: '12.6' },
-    { pid: 901, name: '0xterm', cpu: '0.5' },
+    { pid: 142, name: 'wayland', cpu: '1.2' },
+    { pid: 256, name: 'hyprland', cpu: '4.8' },
+    { pid: 301, name: 'waybar', cpu: '0.3' },
+    { pid: 412, name: 'pipewire', cpu: '2.1' },
+    { pid: 503, name: 'kitty', cpu: '3.4' },
+    { pid: 610, name: 'thunar', cpu: '1.7' },
+    { pid: 722, name: 'neovim', cpu: '5.2' },
+    { pid: 834, name: 'firefox', cpu: '12.6' },
+    { pid: 901, name: 'btop', cpu: '0.5' },
 ];
 
 export default function SystemMonitor() {
@@ -67,7 +67,7 @@ export default function SystemMonitor() {
         }
 
         // Line
-        ctx.strokeStyle = '#00ff41';
+        ctx.strokeStyle = '#a6e3a1'; // Catppuccin Green
         ctx.lineWidth = 2;
         ctx.beginPath();
         cpuHistory.forEach((val, i) => {
@@ -83,8 +83,8 @@ export default function SystemMonitor() {
         ctx.lineTo(0, h);
         ctx.closePath();
         const grad = ctx.createLinearGradient(0, 0, 0, h);
-        grad.addColorStop(0, 'rgba(0,255,65,0.15)');
-        grad.addColorStop(1, 'rgba(0,255,65,0)');
+        grad.addColorStop(0, 'rgba(166, 227, 161, 0.2)');
+        grad.addColorStop(1, 'rgba(166, 227, 161, 0)');
         ctx.fillStyle = grad;
         ctx.fill();
     }, [cpuHistory]);
@@ -146,20 +146,20 @@ export default function SystemMonitor() {
                     <div
                         className="ox-sysmon-process"
                         style={{
-                            borderBottom: '1px solid rgba(255,255,255,0.1)',
+                            borderBottom: '1px solid rgba(255,255,255,0.05)',
                             marginBottom: 4,
                             paddingBottom: 4,
                         }}
                     >
-                        <span className="pid" style={{ color: '#00ff41' }}>
+                        <span className="pid" style={{ color: 'var(--blue)' }}>
                             PID
                         </span>
-                        <span className="name" style={{ color: '#00ff41' }}>
+                        <span className="name" style={{ color: 'var(--blue)' }}>
                             NAME
                         </span>
                         <span
                             className="cpu-usage"
-                            style={{ color: '#00ff41' }}
+                            style={{ color: 'var(--blue)' }}
                         >
                             CPU%
                         </span>

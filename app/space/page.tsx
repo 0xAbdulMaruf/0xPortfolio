@@ -8,8 +8,7 @@ const Desktop = dynamic(() => import('./_components/Desktop'), {
             style={{
                 width: '100vw',
                 height: '100vh',
-                background:
-                    'linear-gradient(135deg, #0b1016 0%, #0a0d13 45%, #101722 100%)',
+                background: '#1e1e2e',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',

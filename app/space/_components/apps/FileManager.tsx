@@ -133,9 +133,9 @@ export default function FileManager() {
                         padding: '1rem',
                         fontFamily:
                             'var(--font-jetbrains-mono), monospace',
-                        fontSize: '12px',
+                        fontSize: '13px',
                         lineHeight: 1.8,
-                        color: 'rgba(255,255,255,0.7)',
+                        color: 'var(--text)',
                         whiteSpace: 'pre-wrap',
                         overflow: 'auto',
                         flex: 1,
@@ -156,9 +156,9 @@ export default function FileManager() {
                                 className={`ox-filemgr-item-icon ${item.type === 'folder' ? 'folder' : ''}`}
                             >
                                 {item.type === 'folder' ? (
-                                    <Folder size={28} />
+                                    <Folder size={36} fill="currentColor" opacity={0.8} />
                                 ) : (
-                                    <FileText size={28} />
+                                    <FileText size={36} />
                                 )}
                             </div>
                             <span className="ox-filemgr-item-name">

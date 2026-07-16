@@ -39,14 +39,14 @@ export default function ContextMenu({
                     onClick={() => handleClick('terminal')}
                 >
                     <img src={iconSrc} alt="" aria-hidden="true" className="ox-context-item-icon" />
-                    Open Terminal
+                    Open Kitty
                 </button>
                 <button
                     className="ox-context-item"
                     onClick={() => handleClick('files')}
                 >
                     <img src={iconSrc} alt="" aria-hidden="true" className="ox-context-item-icon" />
-                    Open File Manager
+                    Open Thunar
                 </button>
                 <button
                     className="ox-context-item"
@@ -60,7 +60,7 @@ export default function ContextMenu({
                     onClick={() => handleClick('editor')}
                 >
                     <img src={iconSrc} alt="" aria-hidden="true" className="ox-context-item-icon" />
-                    Code Editor
+                    Neovim
                 </button>
                 <div className="ox-context-divider" />
                 <button
@@ -68,7 +68,7 @@ export default function ContextMenu({
                     onClick={() => handleClick('about')}
                 >
                     <img src={iconSrc} alt="" aria-hidden="true" className="ox-context-item-icon" />
-                    About 0xLinux
+                    About Arch
                 </button>
             </div>
         </>

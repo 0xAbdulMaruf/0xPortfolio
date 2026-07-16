@@ -31,31 +31,31 @@ const APP_CONFIGS: Record<
     { title: string; icon: ReactNode; width: number; height: number }
 > = {
     terminal: {
-        title: '0xTerm',
+        title: 'Kitty',
         icon: <img src={PLACEHOLDER_ICON} alt="" aria-hidden="true" className="ox-app-icon" />,
         width: 700,
         height: 450,
     },
     files: {
-        title: '0xFiles',
+        title: 'Thunar',
         icon: <img src={PLACEHOLDER_ICON} alt="" aria-hidden="true" className="ox-app-icon" />,
         width: 600,
         height: 400,
     },
     monitor: {
-        title: '0xMon',
+        title: 'btop',
         icon: <img src={PLACEHOLDER_ICON} alt="" aria-hidden="true" className="ox-app-icon" />,
         width: 500,
         height: 500,
     },
     editor: {
-        title: '0xCode',
+        title: 'Neovim',
         icon: <img src={PLACEHOLDER_ICON} alt="" aria-hidden="true" className="ox-app-icon" />,
         width: 650,
         height: 500,
     },
     about: {
-        title: 'About 0xLinux',
+        title: 'About Arch',
         icon: <img src={PLACEHOLDER_ICON} alt="" aria-hidden="true" className="ox-app-icon" />,
         width: 380,
         height: 350,
@@ -63,10 +63,10 @@ const APP_CONFIGS: Record<
 };
 
 const DESKTOP_ICONS = [
-    { id: 'terminal', label: '0xTerm', icon: PLACEHOLDER_ICON },
-    { id: 'files', label: '0xFiles', icon: PLACEHOLDER_ICON },
-    { id: 'monitor', label: '0xMon', icon: PLACEHOLDER_ICON },
-    { id: 'editor', label: '0xCode', icon: PLACEHOLDER_ICON },
+    { id: 'terminal', label: 'Kitty', icon: PLACEHOLDER_ICON },
+    { id: 'files', label: 'Thunar', icon: PLACEHOLDER_ICON },
+    { id: 'monitor', label: 'btop', icon: PLACEHOLDER_ICON },
+    { id: 'editor', label: 'Neovim', icon: PLACEHOLDER_ICON },
 ];
 
 let windowCounter = 0;
@@ -110,7 +110,8 @@ export default function Desktop() {
                 title: config.title,
                 icon: config.icon,
                 x: 120 + offset,
-                y: 60 + offset,
+                // Make sure windows don't spawn under the top panel
+                y: 80 + offset,
                 width: config.width,
                 height: config.height,
                 zIndex: nextZIndex,
@@ -206,7 +207,7 @@ export default function Desktop() {
         >
             {/* Wallpaper */}
             <div className="ox-desktop-wallpaper" />
-            <div className="ox-desktop-scanline" />
+            {/* Removed ox-desktop-scanline for cleaner Hyprland look */}
 
             {/* Desktop Icons */}
             <div className="ox-desktop-icons">
@@ -258,7 +259,7 @@ export default function Desktop() {
                 />
             )}
 
-            {/* Taskbar */}
+            {/* Taskbar (Now Waybar top panel) */}
             <Taskbar
                 windows={windows.map((w) => ({
                     id: w.id,

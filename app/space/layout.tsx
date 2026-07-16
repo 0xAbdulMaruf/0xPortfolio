@@ -1,9 +1,9 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: "0xLinux — 0xMaruF's Space",
+    title: "Arch Linux — 0xMaruF's Space",
     description:
-        'An interactive Linux desktop environment experience by 0xMaruF.',
+        'An interactive Arch Linux & Hyprland desktop environment experience by 0xMaruF.',
 };
 
 export default function SpaceLayout({
@@ -19,7 +19,7 @@ export default function SpaceLayout({
                 zIndex: 100,
                 overflow: 'hidden',
                 background:
-                    'linear-gradient(135deg, #0b1016 0%, #0a0d13 45%, #101722 100%)',
+                    '#1e1e2e', // Catppuccin Mocha Base
             }}
         >
             {children}

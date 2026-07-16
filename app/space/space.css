@@ -1,28 +1,56 @@
 /* ============================================
-    0xLinux Desktop Environment — Arch / Hyprland
+    Arch Linux / Hyprland Glass Desktop Theme
+    Catppuccin Mocha Palette - Win11 Structure
     ============================================ */
 
 :root {
-     --ox-bg: #0b1016;
-     --ox-surface: rgba(15, 20, 28, 0.88);
-     --ox-surface-2: rgba(21, 28, 39, 0.88);
-     --ox-border: rgba(120, 135, 156, 0.18);
-     --ox-text: #dbe4ee;
-     --ox-muted: rgba(219, 228, 238, 0.58);
-     --ox-accent: #89b4fa;
-     --ox-accent-strong: #1793d1;
-     --ox-accent-soft: rgba(137, 180, 250, 0.14);
-     --ox-glow: rgba(137, 180, 250, 0.24);
-     --ox-shadow: 0 28px 80px rgba(0, 0, 0, 0.45);
+    /* Catppuccin Mocha Palette */
+    --crust: #11111b;
+    --mantle: #181825;
+    --base: #1e1e2e;
+    --surface0: #313244;
+    --surface1: #45475a;
+    --surface2: #585b70;
+    --overlay0: #6c7086;
+    --overlay1: #7f849c;
+    --overlay2: #9399b2;
+    --text: #cdd6f4;
+    --subtext0: #a6adc8;
+    --subtext1: #bac2de;
+    --blue: #89b4fa;
+    --lavender: #b4befe;
+    --sapphire: #74c7ec;
+    --sky: #89dceb;
+    --teal: #94e2d5;
+    --green: #a6e3a1;
+    --yellow: #f9e2af;
+    --peach: #fab387;
+    --maroon: #eba0ac;
+    --red: #f38ba8;
+    --mauve: #cba6f7;
+    --pink: #f5c2e7;
+    --flamingo: #f2cdcd;
+    --rosewater: #f5e0dc;
+
+    /* Theme Variables */
+    --ox-bg: var(--base);
+    --ox-surface: rgba(30, 30, 46, 0.45);
+    --ox-surface-solid: rgba(30, 30, 46, 0.85);
+    --ox-border: rgba(137, 180, 250, 0.15);
+    --ox-border-active: rgba(137, 180, 250, 0.6);
+    --ox-text: var(--text);
+    --ox-muted: var(--overlay0);
+    --ox-accent: var(--blue);
+    --ox-accent-strong: #1793d1;
+    --ox-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    --glass-blur: blur(30px);
 }
 
 /* ── Boot screen ── */
 .boot-screen {
     position: fixed;
     inset: 0;
-    background:
-        radial-gradient(circle at top, rgba(137, 180, 250, 0.08), transparent 30%),
-        linear-gradient(180deg, #0a0f15 0%, #05080d 100%);
+    background: var(--crust);
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -34,23 +62,16 @@
 .boot-line {
     font-family: var(--font-jetbrains-mono), 'Courier New', monospace;
     font-size: 13px;
-    color: var(--ox-accent);
+    color: var(--text);
     line-height: 1.8;
     opacity: 0;
-    animation: bootFadeIn 0.15s ease forwards;
+    animation: bootFadeIn 0.1s ease forwards;
 }
 
-.boot-line.ok {
-    color: var(--ox-accent);
-}
-
-.boot-line.info {
-    color: var(--ox-muted);
-}
-
-.boot-line.warn {
-    color: #fab387;
-}
+.boot-line.ok { color: var(--green); }
+.boot-line.info { color: var(--overlay0); }
+.boot-line.warn { color: var(--yellow); }
+.boot-line.arch { color: var(--ox-accent-strong); font-weight: bold; }
 
 .boot-skip {
     position: absolute;
@@ -58,11 +79,12 @@
     right: 2rem;
     font-family: var(--font-jetbrains-mono), monospace;
     font-size: 12px;
-    color: rgba(255, 255, 255, 0.3);
-    background: none;
+    color: var(--overlay0);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: var(--glass-blur);
     border: 1px solid rgba(255, 255, 255, 0.1);
     padding: 6px 16px;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
     transition: all 0.2s;
 }
@@ -70,6 +92,7 @@
 .boot-skip:hover {
     color: var(--ox-accent);
     border-color: var(--ox-accent);
+    background: rgba(137, 180, 250, 0.1);
 }
 
 @keyframes bootFadeIn {
@@ -80,10 +103,7 @@
 .ox-desktop {
     position: fixed;
     inset: 0;
-    background:
-        radial-gradient(circle at 20% 20%, rgba(137, 180, 250, 0.08), transparent 26%),
-        radial-gradient(circle at 80% 10%, rgba(23, 147, 209, 0.08), transparent 24%),
-        linear-gradient(135deg, #0b1016 0%, #0a0d13 45%, #101722 100%);
+    background: var(--base);
     overflow: hidden;
     user-select: none;
 }
@@ -92,26 +112,16 @@
     position: absolute;
     inset: 0;
     z-index: 0;
-    opacity: 0.85;
-    background:
-        radial-gradient(circle at 20% 50%, rgba(23, 147, 209, 0.16) 0%, transparent 42%),
-        radial-gradient(circle at 72% 22%, rgba(137, 180, 250, 0.14) 0%, transparent 30%),
-        radial-gradient(circle at 48% 78%, rgba(137, 180, 250, 0.06) 0%, transparent 35%),
-        linear-gradient(135deg, rgba(8, 11, 15, 0.82), rgba(8, 11, 15, 0.94));
-}
-
-.ox-desktop-scanline {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-    background: repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        rgba(255, 255, 255, 0.025) 2px,
-        rgba(255, 255, 255, 0.025) 4px
-    );
+    /* 
+      TODO: Replace with an actual wallpaper image
+      background-image: url('/path/to/your/wallpaper.png');
+      background-size: cover;
+      background-position: center;
+    */
+    background: 
+        radial-gradient(circle at 15% 50%, rgba(137, 180, 250, 0.15), transparent 50%),
+        radial-gradient(circle at 85% 30%, rgba(203, 166, 247, 0.15), transparent 50%),
+        var(--base);
 }
 
 /* ── Desktop Icons ── */
@@ -129,16 +139,17 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 4px;
-    padding: 10px;
-    border-radius: 8px;
+    gap: 6px;
+    padding: 12px 8px;
+    border-radius: 6px;
     cursor: pointer;
     transition: all 0.2s;
-    width: 80px;
+    width: 84px;
 }
 
 .ox-icon:hover {
-    background: rgba(137, 180, 250, 0.08);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(4px);
 }
 
 .ox-icon:active {
@@ -146,64 +157,63 @@
 }
 
 .ox-icon-img {
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 10px;
-    background: rgba(137, 180, 250, 0.08);
-    border: 1px solid rgba(137, 180, 250, 0.16);
+    border-radius: 6px;
+    background: transparent;
     color: var(--ox-accent);
     overflow: hidden;
 }
 
 .ox-icon-img img,
-.ox-start-item-icon img,
-.ox-context-item-icon,
-.ox-app-icon {
-    width: 18px;
-    height: 18px;
+.ox-context-item-icon {
+    width: 32px;
+    height: 32px;
     object-fit: contain;
     display: block;
-    filter: brightness(0) saturate(100%) invert(80%) sepia(23%) saturate(811%) hue-rotate(180deg) brightness(102%) contrast(94%);
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
 }
 
 .ox-icon-label {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-size: 10px;
-    color: rgba(219, 228, 238, 0.76);
+    font-family: var(--font-jetbrains-mono), sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text);
     text-align: center;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
 }
 
-/* ── Taskbar ── */
+/* ── Taskbar (Win11 Bottom Center Style) ── */
 .ox-taskbar {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    height: 42px;
-    background: rgba(9, 12, 18, 0.92);
-    backdrop-filter: blur(20px);
-    border-top: 1px solid rgba(137, 180, 250, 0.12);
+    height: 48px;
+    background: rgba(30, 30, 46, 0.65);
+    backdrop-filter: var(--glass-blur);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 0.75rem;
+    padding: 0 16px;
     z-index: 50;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .ox-taskbar-left {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    width: 200px; /* Balance right side */
 }
 
 .ox-taskbar-center {
     display: flex;
     align-items: center;
-    gap: 2px;
+    gap: 8px;
     flex: 1;
     justify-content: center;
 }
@@ -211,175 +221,324 @@
 .ox-taskbar-right {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    justify-content: flex-end;
+    gap: 12px;
+    width: 200px;
 }
 
 .ox-start-btn {
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
     border-radius: 6px;
-    border: 1px solid rgba(137, 180, 250, 0.18);
-    background: rgba(137, 180, 250, 0.08);
-    color: var(--ox-accent);
+    border: none;
+    background: transparent;
+    color: var(--ox-accent-strong);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s;
+    transition: all 0.15s;
 }
 
 .ox-start-btn:hover {
-    background: rgba(137, 180, 250, 0.14);
-    border-color: rgba(137, 180, 250, 0.42);
-    box-shadow: 0 0 12px rgba(137, 180, 250, 0.18);
+    background: rgba(255, 255, 255, 0.08);
 }
 
 .ox-taskbar-item {
-    padding: 4px 12px;
-    border-radius: 4px;
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-size: 11px;
-    color: rgba(219, 228, 238, 0.62);
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    background: transparent;
+    border: none;
     cursor: pointer;
-    transition: all 0.2s;
-    white-space: nowrap;
-    max-width: 140px;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+    position: relative;
 }
 
 .ox-taskbar-item:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.08);
 }
 
 .ox-taskbar-item.active {
-    background: rgba(137, 180, 250, 0.12);
-    color: var(--ox-accent);
-    border-bottom: 2px solid var(--ox-accent);
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.ox-taskbar-item-indicator {
+    position: absolute;
+    bottom: 2px;
+    width: 6px;
+    height: 3px;
+    border-radius: 3px;
+    background: var(--overlay0);
+    transition: all 0.2s;
+}
+
+.ox-taskbar-item.active .ox-taskbar-item-indicator {
+    width: 16px;
+    background: var(--blue);
+}
+
+.ox-taskbar-item img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+.ox-tray-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: background 0.15s;
+    cursor: pointer;
+}
+
+.ox-tray-container:hover {
+    background: rgba(255, 255, 255, 0.08);
 }
 
 .ox-clock {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-size: 11px;
-    color: rgba(219, 228, 238, 0.72);
+    font-family: var(--font-jetbrains-mono), sans-serif;
+    font-size: 12px;
+    color: var(--text);
+    text-align: right;
+    line-height: 1.2;
+    display: flex;
+    flex-direction: column;
 }
 
 .ox-tray-icon {
-    color: rgba(219, 228, 238, 0.52);
-    width: 14px;
-    height: 14px;
+    color: var(--text);
+    width: 16px;
+    height: 16px;
 }
 
-/* ── Start Menu ── */
+/* ── Win11 Start Menu (Centered) ── */
+.ox-start-menu-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 55;
+}
+
 .ox-start-menu {
     position: absolute;
-    bottom: 48px;
-    left: 0.75rem;
-    width: 280px;
-    background: rgba(12, 16, 22, 0.96);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(137, 180, 250, 0.14);
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 640px;
+    background: rgba(30, 30, 46, 0.75);
+    backdrop-filter: blur(40px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
-    padding: 0.75rem;
     z-index: 60;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
-}
-
-.ox-start-menu-title {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-size: 10px;
-    color: rgba(255, 255, 255, 0.3);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    padding: 4px 8px;
-    margin-bottom: 4px;
-}
-
-.ox-start-item {
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
     display: flex;
+    flex-direction: column;
+    animation: startMenuPop 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes startMenuPop {
+    0% { opacity: 0; transform: translate(-50%, 20px); }
+    100% { opacity: 1; transform: translate(-50%, 0); }
+}
+
+.ox-start-search-container {
+    padding: 24px 32px 0 32px;
+}
+
+.ox-start-search {
+    width: 100%;
+    background: rgba(24, 24, 37, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 10px 16px 10px 40px;
+    border-radius: 20px;
+    color: var(--text);
+    font-size: 14px;
+    outline: none;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+    transition: all 0.2s;
+}
+
+.ox-start-search:focus {
+    background: rgba(30, 30, 46, 0.9);
+    border-color: var(--blue);
+}
+
+.ox-start-body {
+    flex: 1;
+    padding: 24px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.ox-start-section-header {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 10px;
+    padding: 0 8px;
+}
+
+.ox-start-section-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.ox-start-section-btn {
+    font-size: 12px;
+    color: var(--blue);
+    background: rgba(255, 255, 255, 0.05);
+    border: none;
+    padding: 4px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.ox-start-section-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.ox-start-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 16px 8px;
+}
+
+.ox-start-grid-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
     padding: 8px;
     border-radius: 6px;
     cursor: pointer;
     transition: all 0.15s;
-    width: 100%;
+    background: transparent;
     border: none;
-    background: none;
-    text-align: left;
 }
 
-.ox-start-item:hover {
-    background: rgba(137, 180, 250, 0.08);
+.ox-start-grid-item:hover {
+    background: rgba(255, 255, 255, 0.08);
 }
 
-.ox-start-item-icon {
-    width: 28px;
-    height: 28px;
+.ox-start-grid-icon {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
+
+.ox-start-grid-label {
+    font-size: 11px;
+    color: var(--text);
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+.ox-start-footer {
+    height: 64px;
+    background: rgba(24, 24, 37, 0.5);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 32px;
+}
+
+.ox-start-user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 12px 6px 6px;
     border-radius: 6px;
-    background: rgba(137, 180, 250, 0.1);
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.ox-start-user:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.ox-start-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--blue);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--ox-accent);
-    flex-shrink: 0;
+    color: var(--crust);
+    font-weight: bold;
 }
 
-.ox-start-item-text {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-size: 12px;
-    color: rgba(219, 228, 238, 0.84);
+.ox-start-power {
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    background: transparent;
+    border: none;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.15s;
 }
 
-.ox-start-item-desc {
-    font-size: 10px;
-    color: rgba(219, 228, 238, 0.42);
+.ox-start-power:hover {
+    background: rgba(243, 139, 168, 0.15);
+    color: var(--red);
 }
 
-.ox-start-divider {
-    height: 1px;
-    background: rgba(255, 255, 255, 0.08);
-    margin: 6px 0;
-}
-
-/* ── Window ── */
+/* ── Window (Win11 Chrome style) ── */
 .ox-window {
     position: absolute;
     min-width: 400px;
     min-height: 300px;
-    border-radius: 10px;
+    border-radius: 12px;
     overflow: hidden;
-    border: 1px solid rgba(137, 180, 250, 0.12);
-    box-shadow: var(--ox-shadow), 0 0 1px rgba(137, 180, 250, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: var(--ox-shadow);
     display: flex;
     flex-direction: column;
-    background: rgba(14, 18, 26, 0.96);
-    backdrop-filter: blur(16px);
+    background: var(--ox-surface);
+    backdrop-filter: var(--glass-blur);
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .ox-window.focused {
-    border-color: rgba(137, 180, 250, 0.2);
-    box-shadow: 0 20px 80px rgba(0, 0, 0, 0.6), 0 0 20px rgba(137, 180, 250, 0.08);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1);
 }
 
 .ox-window.maximized {
     top: 0 !important;
     left: 0 !important;
     width: 100vw !important;
-    height: calc(100vh - 42px) !important;
+    height: calc(100vh - 48px) !important; /* Bottom taskbar space */
     border-radius: 0;
 }
 
 .ox-window-titlebar {
     height: 36px;
-    background: rgba(20, 25, 34, 0.95);
+    background: transparent;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 12px;
+    padding-left: 12px;
     cursor: grab;
     flex-shrink: 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
 }
 
 .ox-window-titlebar:active {
@@ -387,504 +546,149 @@
 }
 
 .ox-window-title {
-    font-family: var(--font-jetbrains-mono), monospace;
     font-size: 12px;
-    color: rgba(219, 228, 238, 0.72);
+    color: var(--text);
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
 }
 
 .ox-window-title-icon {
-    color: var(--ox-accent);
-    width: 14px;
-    height: 14px;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.ox-window-title-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .ox-window-controls {
     display: flex;
-    gap: 6px;
+    height: 100%;
 }
 
 .ox-window-btn {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
+    width: 46px;
+    height: 100%;
     border: none;
+    background: transparent;
+    color: var(--text);
     cursor: pointer;
     transition: all 0.15s;
-    opacity: 0.7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
 }
 
 .ox-window-btn:hover {
-    opacity: 1;
-    transform: scale(1.2);
+    background: rgba(255, 255, 255, 0.1);
 }
 
-.ox-window-btn.close {
-    background: #ff5f57;
-}
-
-.ox-window-btn.minimize {
-    background: #febc2e;
-}
-
-.ox-window-btn.maximize {
-    background: #28c840;
+.ox-window-btn.close:hover {
+    background: #e81123;
+    color: white;
 }
 
 .ox-window-body {
     flex: 1;
     overflow: auto;
     position: relative;
+    background: rgba(30, 30, 46, 0.4); /* Base content bg */
 }
 
-/* ── Terminal App ── */
+/* ── Apps ── */
 .ox-terminal {
     padding: 12px;
     font-family: var(--font-jetbrains-mono), 'Courier New', monospace;
     font-size: 13px;
     line-height: 1.6;
-    color: var(--ox-text);
+    color: var(--text);
     height: 100%;
     overflow-y: auto;
-}
-
-.ox-terminal-line {
-    white-space: pre-wrap;
-    word-break: break-all;
-}
-
-.ox-terminal-line .prompt {
-    color: var(--ox-accent);
-    font-weight: 600;
-}
-
-.ox-terminal-line .path {
-    color: #5599ff;
-}
-
-.ox-terminal-line .command {
-    color: #ffffff;
-}
-
-.ox-terminal-output {
-    color: #b0b0b0;
-}
-
-.ox-terminal-output .highlight {
-    color: #00ff41;
-}
-
-.ox-terminal-output .warn {
-    color: #ffaa00;
-}
-
-.ox-terminal-output .error {
-    color: #ff5555;
-}
-
-.ox-terminal-input-line {
-    display: flex;
-    align-items: center;
-}
-
-.ox-terminal-input {
-    flex: 1;
-    background: none;
-    border: none;
-    outline: none;
-    font-family: inherit;
-    font-size: inherit;
-    color: #ffffff;
-    caret-color: var(--ox-accent);
-}
-
-.ox-terminal-cursor {
-    display: inline-block;
-    width: 8px;
-    height: 16px;
-    background: var(--ox-accent);
-    animation: termBlink 1s step-end infinite;
-    vertical-align: text-bottom;
-}
-
-@keyframes termBlink {
-    50% { opacity: 0; }
-}
-
-/* ── Neofetch ASCII ── */
-.neofetch-output {
-    display: flex;
-    gap: 2rem;
-    margin: 0.5rem 0;
-}
-
-.neofetch-ascii {
-    color: var(--ox-accent);
-    white-space: pre;
-    font-size: 11px;
-    line-height: 1.2;
-    flex-shrink: 0;
-}
-
-.neofetch-info {
-    font-size: 12px;
-    line-height: 1.8;
-}
-
-.neofetch-info .label {
-    color: var(--ox-accent);
-    font-weight: 600;
-}
-
-.neofetch-info .value {
-    color: #b0b0b0;
-}
-
-.neofetch-separator {
-    color: rgba(255, 255, 255, 0.15);
-}
-
-/* ── File Manager ── */
-.ox-filemgr {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-
-.ox-filemgr-toolbar {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 12px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    background: rgba(25, 25, 25, 0.5);
-}
-
-.ox-filemgr-breadcrumb {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.5);
-}
-
-.ox-filemgr-breadcrumb span {
-    color: #00ff41;
-}
-
-.ox-filemgr-back {
-    width: 24px;
-    height: 24px;
-    border-radius: 4px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: none;
-    color: rgba(255, 255, 255, 0.5);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.15s;
-}
-
-.ox-filemgr-back:hover {
-    border-color: #00ff41;
-    color: #00ff41;
-}
-
-.ox-filemgr-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    gap: 0.5rem;
-    padding: 1rem;
-    flex: 1;
-    overflow-y: auto;
-    align-content: start;
-}
-
-.ox-filemgr-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    padding: 12px 8px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.15s;
-}
-
-.ox-filemgr-item:hover {
-    background: rgba(0, 255, 65, 0.06);
-}
-
-.ox-filemgr-item-icon {
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #00ff41;
-}
-
-.ox-filemgr-item-icon.folder {
-    color: #5599ff;
-}
-
-.ox-filemgr-item-name {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-size: 10px;
-    color: rgba(255, 255, 255, 0.7);
-    text-align: center;
-    word-break: break-all;
-}
-
-/* ── System Monitor ── */
-.ox-sysmon {
-    padding: 1rem;
-    font-family: var(--font-jetbrains-mono), monospace;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    height: 100%;
-    overflow-y: auto;
-}
-
-.ox-sysmon-section {
-    background: rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 8px;
-    padding: 12px;
-}
-
-.ox-sysmon-title {
-    font-size: 11px;
-    color: rgba(255, 255, 255, 0.4);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 8px;
-}
-
-.ox-sysmon-bar {
-    height: 8px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 4px;
-    overflow: hidden;
-    margin: 4px 0;
-}
-
-.ox-sysmon-bar-fill {
-    height: 100%;
-    border-radius: 4px;
-    transition: width 1s ease;
-}
-
-.ox-sysmon-bar-fill.cpu {
-    background: linear-gradient(90deg, #00ff41, #00cc33);
-}
-
-.ox-sysmon-bar-fill.ram {
-    background: linear-gradient(90deg, #5599ff, #3366cc);
-}
-
-.ox-sysmon-bar-fill.net {
-    background: linear-gradient(90deg, #ff9900, #cc7700);
-}
-
-.ox-sysmon-value {
-    font-size: 11px;
-    color: rgba(255, 255, 255, 0.5);
-    text-align: right;
-}
-
-.ox-sysmon-graph {
-    width: 100%;
-    height: 60px;
-}
-
-.ox-sysmon-processes {
-    font-size: 11px;
-}
-
-.ox-sysmon-process {
-    display: flex;
-    justify-content: space-between;
-    padding: 4px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-    color: rgba(255, 255, 255, 0.6);
-}
-
-.ox-sysmon-process .pid {
-    color: #00ff41;
-    width: 50px;
-}
-
-.ox-sysmon-process .name {
-    flex: 1;
-    color: rgba(255, 255, 255, 0.7);
-}
-
-.ox-sysmon-process .cpu-usage {
-    width: 50px;
-    text-align: right;
-    color: #ffaa00;
-}
-
-/* ── Code Editor ── */
-.ox-editor {
-    display: flex;
-    height: 100%;
-    font-family: var(--font-jetbrains-mono), 'Courier New', monospace;
-    font-size: 13px;
-    line-height: 1.6;
-}
-
-.ox-editor-gutter {
-    width: 50px;
-    background: rgba(0, 0, 0, 0.3);
-    border-right: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 12px 0;
-    text-align: right;
-    color: rgba(255, 255, 255, 0.2);
-    flex-shrink: 0;
-    overflow: hidden;
-}
-
-.ox-editor-gutter-line {
-    padding-right: 12px;
-    height: 1.6em;
-}
-
-.ox-editor-content {
-    padding: 12px;
-    flex: 1;
-    overflow: auto;
-    white-space: pre;
-}
-
-.ox-editor-content .keyword {
-    color: #ff79c6;
-}
-
-.ox-editor-content .string {
-    color: #f1fa8c;
-}
-
-.ox-editor-content .comment {
-    color: #6272a4;
-    font-style: italic;
-}
-
-.ox-editor-content .function {
-    color: #50fa7b;
-}
-
-.ox-editor-content .variable {
-    color: #8be9fd;
-}
-
-.ox-editor-content .number {
-    color: #bd93f9;
-}
-
-.ox-editor-content .operator {
-    color: #ff79c6;
-}
-
-/* ── About Widget ── */
-.ox-about {
-    padding: 2rem;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-}
-
-.ox-about-logo {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-size: 2rem;
-    font-weight: 700;
-    color: #00ff41;
-    text-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
-}
-
-.ox-about-version {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.4);
-}
-
-.ox-about-desc {
-    font-size: 13px;
-    color: rgba(255, 255, 255, 0.6);
-    max-width: 300px;
-    line-height: 1.6;
-}
-
-.ox-about-links {
-    display: flex;
-    gap: 1rem;
-}
-
-.ox-about-link {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-size: 12px;
-    color: #00ff41;
-    text-decoration: none;
-    transition: all 0.2s;
-}
-
-.ox-about-link:hover {
-    text-decoration: underline;
-    text-shadow: 0 0 8px rgba(0, 255, 65, 0.3);
-}
-
-/* ── Context Menu ── */
-.ox-context-menu {
-    position: fixed;
-    min-width: 180px;
-    background: rgba(20, 20, 20, 0.95);
-    backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    padding: 4px;
-    z-index: 100;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-}
-
-.ox-context-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 10px;
-    border-radius: 4px;
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.7);
-    cursor: pointer;
-    transition: all 0.1s;
-    width: 100%;
-    border: none;
-    background: none;
-    text-align: left;
-}
-
-.ox-context-item:hover {
-    background: rgba(0, 255, 65, 0.1);
-    color: #00ff41;
-}
-
-.ox-context-item-icon {
-    width: 14px;
-    height: 14px;
-    color: rgba(255, 255, 255, 0.4);
-}
-
-.ox-context-item:hover .ox-context-item-icon {
-    color: #00ff41;
-}
-
-.ox-context-divider {
-    height: 1px;
-    background: rgba(255, 255, 255, 0.06);
-    margin: 4px 8px;
-}
+    background: rgba(17, 17, 27, 0.7); /* Crust */
+}
+
+.ox-terminal-line { white-space: pre-wrap; word-break: break-all; }
+.ox-terminal-line .prompt-user { color: var(--green); font-weight: bold; }
+.ox-terminal-line .prompt-at { color: var(--text); }
+.ox-terminal-line .prompt-host { color: var(--blue); font-weight: bold; }
+.ox-terminal-line .prompt-path { color: var(--mauve); font-weight: bold; }
+.ox-terminal-line .prompt-char { color: var(--text); }
+.ox-terminal-line .command { color: var(--text); }
+.ox-terminal-output { color: var(--subtext1); }
+.ox-terminal-input-line { display: flex; align-items: center; }
+.ox-terminal-input { flex: 1; background: none; border: none; outline: none; font-family: inherit; font-size: inherit; color: var(--text); caret-color: var(--blue); }
+
+.neofetch-output { display: flex; gap: 2rem; margin: 1rem 0; }
+.neofetch-ascii { color: var(--ox-accent-strong); white-space: pre; font-size: 12px; font-weight: bold; line-height: 1.2; flex-shrink: 0; text-shadow: 0 0 10px rgba(23, 147, 209, 0.3); }
+.neofetch-info { font-size: 13px; line-height: 1.8; }
+.neofetch-info .label { color: var(--blue); font-weight: 600; }
+.neofetch-info .value { color: var(--text); }
+.neofetch-separator { color: var(--overlay0); }
+
+/* File Manager */
+.ox-filemgr { display: flex; flex-direction: column; height: 100%; }
+.ox-filemgr-toolbar { display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); background: rgba(24, 24, 37, 0.5); }
+.ox-filemgr-breadcrumb { font-family: var(--font-jetbrains-mono), monospace; font-size: 12px; color: var(--overlay0); background: rgba(17, 17, 27, 0.5); padding: 4px 12px; border-radius: 6px; border: 1px solid rgba(255, 255, 255, 0.05); }
+.ox-filemgr-breadcrumb span { color: var(--text); }
+.ox-filemgr-back { width: 28px; height: 28px; border-radius: 6px; border: 1px solid rgba(255, 255, 255, 0.05); background: rgba(255, 255, 255, 0.02); color: var(--text); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
+.ox-filemgr-back:hover:not(:disabled) { background: rgba(255, 255, 255, 0.1); }
+.ox-filemgr-back:disabled { opacity: 0.5; cursor: not-allowed; }
+.ox-filemgr-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 0.5rem; padding: 1rem; flex: 1; overflow-y: auto; align-content: start; }
+.ox-filemgr-item { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 12px 8px; border-radius: 8px; cursor: pointer; transition: all 0.15s; }
+.ox-filemgr-item:hover { background: rgba(255, 255, 255, 0.05); }
+.ox-filemgr-item-icon { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; color: var(--text); }
+.ox-filemgr-item-icon.folder { color: var(--blue); }
+.ox-filemgr-item-name { font-family: var(--font-jetbrains-mono), sans-serif; font-size: 12px; color: var(--text); text-align: center; word-break: break-all; }
+
+/* System Monitor */
+.ox-sysmon { padding: 1rem; font-family: var(--font-jetbrains-mono), monospace; display: flex; flex-direction: column; gap: 1rem; height: 100%; overflow-y: auto; }
+.ox-sysmon-section { background: rgba(24, 24, 37, 0.5); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 16px; }
+.ox-sysmon-title { font-size: 12px; font-weight: bold; color: var(--blue); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+.ox-sysmon-bar { height: 10px; background: rgba(17, 17, 27, 0.8); border-radius: 5px; overflow: hidden; margin: 6px 0; }
+.ox-sysmon-bar-fill { height: 100%; border-radius: 5px; transition: width 1s ease; }
+.ox-sysmon-bar-fill.cpu { background: var(--green); }
+.ox-sysmon-bar-fill.ram { background: var(--mauve); }
+.ox-sysmon-bar-fill.net { background: var(--peach); }
+.ox-sysmon-value { font-size: 12px; color: var(--subtext1); text-align: right; }
+.ox-sysmon-graph { width: 100%; height: 60px; }
+.ox-sysmon-processes { font-size: 12px; }
+.ox-sysmon-process { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.02); color: var(--text); }
+.ox-sysmon-process .pid { color: var(--overlay0); width: 50px; }
+.ox-sysmon-process .name { flex: 1; color: var(--text); }
+.ox-sysmon-process .cpu-usage { width: 50px; text-align: right; color: var(--green); }
+
+/* Code Editor */
+.ox-editor { display: flex; height: 100%; font-family: var(--font-jetbrains-mono), 'Courier New', monospace; font-size: 13px; line-height: 1.6; background: rgba(30, 30, 46, 0.6); }
+.ox-editor-gutter { width: 40px; background: rgba(24, 24, 37, 0.5); border-right: 1px solid rgba(255, 255, 255, 0.05); padding: 12px 0; text-align: right; color: var(--overlay0); flex-shrink: 0; overflow: hidden; }
+.ox-editor-gutter-line { padding-right: 12px; height: 1.6em; }
+.ox-editor-content { padding: 12px; flex: 1; overflow: auto; white-space: pre; color: var(--text); }
+.ox-editor-content .keyword { color: var(--mauve); }
+.ox-editor-content .string { color: var(--green); }
+.ox-editor-content .comment { color: var(--overlay0); font-style: italic; }
+.ox-editor-content .function { color: var(--blue); }
+.ox-editor-content .variable { color: var(--flamingo); }
+.ox-editor-content .number { color: var(--peach); }
+.ox-editor-content .operator { color: var(--sky); }
+
+/* About Widget */
+.ox-about { padding: 2rem; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+.ox-about-logo { font-family: var(--font-jetbrains-mono), monospace; font-size: 2.5rem; font-weight: 800; color: var(--ox-accent-strong); text-shadow: 0 0 20px rgba(23, 147, 209, 0.4); }
+.ox-about-version { font-family: var(--font-jetbrains-mono), monospace; font-size: 13px; color: var(--overlay0); }
+.ox-about-desc { font-size: 14px; color: var(--text); max-width: 320px; line-height: 1.6; }
+.ox-about-links { display: flex; gap: 1.5rem; }
+.ox-about-link { font-family: var(--font-jetbrains-mono), monospace; font-size: 13px; color: var(--blue); text-decoration: none; transition: all 0.2s; font-weight: 500; }
+.ox-about-link:hover { color: var(--sapphire); text-shadow: 0 0 10px rgba(137, 180, 250, 0.4); }
+
+/* Context Menu */
+.ox-context-menu { position: fixed; min-width: 200px; background: rgba(30, 30, 46, 0.7); backdrop-filter: var(--glass-blur); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 6px; z-index: 100; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05); }
+.ox-context-item { display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-radius: 6px; font-family: var(--font-jetbrains-mono), sans-serif; font-size: 13px; color: var(--text); cursor: pointer; transition: all 0.15s; width: 100%; border: none; background: none; text-align: left; }
+.ox-context-item:hover { background: rgba(255, 255, 255, 0.1); color: var(--blue); }
+.ox-context-item-icon { width: 16px; height: 16px; color: var(--overlay0); }
+.ox-context-item:hover .ox-context-item-icon { color: var(--blue); }
+.ox-context-divider { height: 1px; background: rgba(255, 255, 255, 0.05); margin: 6px 8px; }
