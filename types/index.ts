@@ -28,3 +28,19 @@ export interface IProject {
     liveUrl?: string;
     sourceCode?: string;
 }
+
+export interface ICertificate {
+    title: string;
+    company: string;
+    category: string;
+    date: string;
+    credentialId?: string;
+    image: string;
+    verifyUrl?: string;
+}
+
+export interface ICertificateCompany {
+    name: string;
+    logo: string;
+    color: string;
+}

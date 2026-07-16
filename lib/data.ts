@@ -1,4 +1,4 @@
-import { IProject } from '@/types';
+import { IProject, ICertificate, ICertificateCompany } from '@/types';
 
 export const GENERAL_INFO = {
     email: 'abdulmaruf9024@gmail.com',
@@ -199,5 +199,120 @@ export const HUNTING_REPORTS = [
         bounty: '$2,500',
         description: 'Race condition in password reset flow allowing account takeover by exploiting timing window in token validation.',
         link: '#',
+    },
+];
+
+export const CERTIFICATE_COMPANIES: ICertificateCompany[] = [
+    { name: 'Google', logo: '/certificates/logos/google.svg', color: '#4285F4' },
+    { name: 'CompTIA', logo: '/certificates/logos/comptia.svg', color: '#C8202F' },
+    { name: 'TryHackMe', logo: '/certificates/logos/tryhackme.svg', color: '#88CC14' },
+    { name: 'HackTheBox', logo: '/certificates/logos/hackthebox.svg', color: '#9FEF00' },
+    { name: 'Coursera', logo: '/certificates/logos/coursera.svg', color: '#0056D2' },
+    { name: 'EC-Council', logo: '/certificates/logos/eccouncil.svg', color: '#E31837' },
+];
+
+export const CERTIFICATES: ICertificate[] = [
+    {
+        title: 'Google Cybersecurity Professional',
+        company: 'Google',
+        category: 'Security',
+        date: '2024-03',
+        image: '/certificates/google-cybersec.png',
+        credentialId: 'GCS-2024-001',
+        verifyUrl: '#',
+    },
+    {
+        title: 'Google IT Support Professional',
+        company: 'Google',
+        category: 'Networking',
+        date: '2024-01',
+        image: '/certificates/google-it.png',
+        credentialId: 'GIT-2024-002',
+        verifyUrl: '#',
+    },
+    {
+        title: 'CompTIA Security+',
+        company: 'CompTIA',
+        category: 'Security',
+        date: '2024-06',
+        image: '/certificates/comptia-sec.png',
+        credentialId: 'SEC-2024-003',
+        verifyUrl: '#',
+    },
+    {
+        title: 'CompTIA Network+',
+        company: 'CompTIA',
+        category: 'Networking',
+        date: '2024-02',
+        image: '/certificates/comptia-net.png',
+        credentialId: 'NET-2024-004',
+        verifyUrl: '#',
+    },
+    {
+        title: 'Introduction to Cyber Security',
+        company: 'TryHackMe',
+        category: 'Security',
+        date: '2024-04',
+        image: '/certificates/thm-intro.png',
+        verifyUrl: '#',
+    },
+    {
+        title: 'Pre Security Path',
+        company: 'TryHackMe',
+        category: 'Security',
+        date: '2024-05',
+        image: '/certificates/thm-presec.png',
+        verifyUrl: '#',
+    },
+    {
+        title: 'Penetration Tester Path',
+        company: 'TryHackMe',
+        category: 'Security',
+        date: '2024-07',
+        image: '/certificates/thm-pentest.png',
+        verifyUrl: '#',
+    },
+    {
+        title: 'Starting Point',
+        company: 'HackTheBox',
+        category: 'Security',
+        date: '2024-08',
+        image: '/certificates/htb-starting.png',
+        verifyUrl: '#',
+    },
+    {
+        title: 'Bug Bounty Hunter Path',
+        company: 'HackTheBox',
+        category: 'Security',
+        date: '2024-09',
+        image: '/certificates/htb-bughunter.png',
+        verifyUrl: '#',
+    },
+    {
+        title: 'Python for Everybody',
+        company: 'Coursera',
+        category: 'Programming',
+        date: '2023-11',
+        image: '/certificates/coursera-python.png',
+        credentialId: 'CRS-2023-010',
+        verifyUrl: '#',
+    },
+    {
+        title: 'Certified Ethical Hacker (CEH)',
+        company: 'EC-Council',
+        category: 'Security',
+        date: '2024-10',
+        image: '/certificates/eccouncil-ceh.png',
+        credentialId: 'CEH-2024-011',
+        verifyUrl: '#',
+    },
+    {
+        title: 'Computer Hacking Forensic Investigator',
+        company: 'EC-Council',
+        category: 'Security',
+        date: '2024-12',
+        image: '/certificates/eccouncil-chfi.png',
+        credentialId: 'CHFI-2024-012',
+        verifyUrl: '#',
     },
 ];

@@ -1,7 +1,7 @@
 'use client';
 import { cn } from '@/lib/utils';
 import { useState } from 'react';
-import { MoveUpRight, Home, User, Code2, Briefcase, Bug, Folder, Mail, Download } from 'lucide-react';
+import { MoveUpRight, Home, User, Code2, Briefcase, Bug, Folder, Mail, Download, Monitor, Award } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { GENERAL_INFO, SOCIAL_LINKS } from '@/lib/data';
 import { FloatingDock } from '@/components/ui/floating-dock';
@@ -197,6 +197,16 @@ const Navbar = () => {
                             title: 'Projects',
                             icon: <Folder className="h-full w-full text-neutral-300" />,
                             href: '/#selected-projects',
+                        },
+                        {
+                            title: 'Certificates',
+                            icon: <Award className="h-full w-full text-neutral-300" />,
+                            href: '/certificates',
+                        },
+                        {
+                            title: "0xMaruF's Space",
+                            icon: <Monitor className="h-full w-full text-neutral-300" />,
+                            href: '/space',
                         },
                         {
                             title: 'Contact',

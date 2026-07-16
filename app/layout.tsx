@@ -4,12 +4,10 @@ import { ReactLenis } from 'lenis/react';
 
 import 'lenis/dist/lenis.css';
 import './globals.css';
-import Footer from '@/components/Footer';
 import ScrollProgressIndicator from '@/components/ScrollProgressIndicator';
-import ParticleBackground from '@/components/ParticleBackground';
-import Navbar from '@/components/Navbar';
 import Preloader from '../components/Preloader';
 import StickyEmail from './_components/StickyEmail';
+import AppShell from '@/components/AppShell';
 
 const antonFont = Anton({
     weight: '400',
@@ -55,13 +53,10 @@ export default function RootLayout({
                         duration: 1.4,
                     }}
                 >
-                    <Navbar />
-                    <main>{children}</main>
-                    <Footer />
+                    <AppShell>{children}</AppShell>
 
                     <Preloader />
                     <ScrollProgressIndicator />
-                    <ParticleBackground />
                     <StickyEmail />
                 </ReactLenis>
             </body>
