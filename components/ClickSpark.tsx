@@ -65,6 +65,9 @@ const ClickSpark = ({
         [easing],
     );
 
+    const isAnimatingRef = useRef(false);
+    const startAnimationRef = useRef<(() => void) | null>(null);
+
     useEffect(() => {
         const canvas = canvasRef.current;
         if (!canvas) return;
@@ -73,6 +76,13 @@ const ClickSpark = ({
         let animationId: number;
 
         const draw = (timestamp: number) => {
+            if (sparksRef.current.length === 0) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                isAnimatingRef.current = false;
+                startTimeRef.current = null;
+                return;
+            }
+
             if (!startTimeRef.current) startTimeRef.current = timestamp;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -101,8 +111,23 @@ const ClickSpark = ({
             animationId = requestAnimationFrame(draw);
         };
 
-        animationId = requestAnimationFrame(draw);
-        return () => cancelAnimationFrame(animationId);
+        const startAnimation = () => {
+            if (!isAnimatingRef.current && sparksRef.current.length > 0) {
+                isAnimatingRef.current = true;
+                startTimeRef.current = null;
+                animationId = requestAnimationFrame(draw);
+            }
+        };
+
+        startAnimationRef.current = startAnimation;
+
+        // Start if there are initial sparks (unlikely but safe)
+        startAnimation();
+
+        return () => {
+            cancelAnimationFrame(animationId);
+            isAnimatingRef.current = false;
+        };
     }, [sparkColor, sparkSize, sparkRadius, sparkCount, duration, easeFunc, extraScale]);
 
     const handleClick = (e: React.MouseEvent) => {
@@ -119,6 +144,10 @@ const ClickSpark = ({
             startTime: now,
         }));
         sparksRef.current.push(...newSparks);
+
+        if (startAnimationRef.current) {
+            startAnimationRef.current();
+        }
     };
 
     return (

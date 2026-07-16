@@ -568,7 +568,7 @@ export const KBtn = ({
   return (
     <div
       className={cn(
-        "[transform:translateZ(0)] rounded-[4px] p-[0.5px] [will-change:transform]",
+        "rounded-[4px] p-[0.5px]",
         backlit && "bg-white/[0.2] shadow-xl shadow-white"
       )}
     >

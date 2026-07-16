@@ -7,6 +7,7 @@ import {
     Environment,
     Lightformer,
     RoundedBox,
+    shaderMaterial,
 } from '@react-three/drei';
 import {
     BallCollider,
@@ -22,6 +23,7 @@ declare module '@react-three/fiber' {
   interface ThreeElements {
     meshLineGeometry: any;
     meshLineMaterial: any;
+    roundedImageMaterial: any;
   }
 }
 
@@ -31,7 +33,44 @@ import './Lanyard.css';
 const PHOTO_TEXTURE = '/lanyard/maruf.jpg';
 const LANYARD_PNG = '/lanyard/lanyard.png';
 
-extend({ MeshLineGeometry, MeshLineMaterial });
+const RoundedImageMaterial = shaderMaterial(
+    {
+        uTexture: null,
+        uRadius: 0.05,
+        uSize: new THREE.Vector2(1.6, 2.3),
+    },
+    // Vertex Shader
+    `
+    varying vec2 vUv;
+    void main() {
+        vUv = uv;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+    `,
+    // Fragment Shader
+    `
+    varying vec2 vUv;
+    uniform sampler2D uTexture;
+    uniform float uRadius;
+    uniform vec2 uSize;
+
+    float sdRoundedBox(in vec2 p, in vec2 b, in float r) {
+        vec2 q = abs(p) - b + r;
+        return min(max(q.x, q.y), 0.0) + length(max(q, 0.0)) - r;
+    }
+
+    void main() {
+        vec2 p = (vUv - 0.5) * uSize;
+        float d = sdRoundedBox(p, uSize * 0.5, uRadius);
+        float alpha = 1.0 - smoothstep(-0.005, 0.005, d);
+        if (alpha <= 0.0) discard;
+        vec4 color = texture2D(uTexture, vUv);
+        gl_FragColor = vec4(color.rgb, color.a * alpha);
+    }
+    `
+);
+
+extend({ MeshLineGeometry, MeshLineMaterial, RoundedImageMaterial });
 
 type LanyardProps = {
     position?: [number, number, number];
@@ -57,7 +96,7 @@ export default function Lanyard({
     }, []);
 
     return (
-        <div className="lanyard-wrapper">
+        <div className="lanyard-wrapper" style={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <Canvas
                 camera={{ position: position, fov: fov }}
                 dpr={[1, isMobile ? 1.5 : 2]}
@@ -118,14 +157,18 @@ function PhotoCard({ isMobile }: { isMobile: boolean }) {
     return (
         <group>
             {/* Glow border behind the card */}
-            <mesh position={[0, 0, -0.02]}>
-                <planeGeometry args={[1.82, 2.52]} />
+            <RoundedBox
+                args={[1.82, 2.52, 0.01]}
+                radius={0.07}
+                smoothness={4}
+                position={[0, 0, -0.02]}
+            >
                 <meshBasicMaterial
                     color="#00ff41"
                     transparent
                     opacity={isMobile ? 0.15 : 0.25}
                 />
-            </mesh>
+            </RoundedBox>
 
             {/* Outer frame */}
             <RoundedBox
@@ -144,12 +187,12 @@ function PhotoCard({ isMobile }: { isMobile: boolean }) {
             {/* Photo surface */}
             <mesh position={[0, 0, 0.01]}>
                 <planeGeometry args={[1.6, 2.3]} />
-                <meshPhysicalMaterial
-                    map={photoTexture}
-                    roughness={0.4}
-                    metalness={0.05}
-                    clearcoat={isMobile ? 0 : 0.3}
-                    clearcoatRoughness={0.2}
+                {/* @ts-ignore */}
+                <roundedImageMaterial
+                    uTexture={photoTexture}
+                    uRadius={0.06}
+                    uSize={new THREE.Vector2(1.6, 2.3)}
+                    transparent
                 />
             </mesh>
 

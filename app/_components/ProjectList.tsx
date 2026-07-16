@@ -30,8 +30,10 @@ const ProjectList = () => {
                 return;
             }
 
+            const container = containerRef.current;
+            if (!container) return;
+
             const handleMouseMove = contextSafe?.((e: MouseEvent) => {
-                if (!containerRef.current) return;
                 if (!imageContainer.current) return;
 
                 if (window.innerWidth < 768) {
@@ -39,24 +41,9 @@ const ProjectList = () => {
                     return;
                 }
 
-                const containerRect =
-                    containerRef.current?.getBoundingClientRect();
-                const imageRect =
-                    imageContainer.current.getBoundingClientRect();
+                const containerRect = container.getBoundingClientRect();
+                const imageRect = imageContainer.current.getBoundingClientRect();
                 const offsetTop = e.clientY - containerRect.y;
-
-                // if cursor is outside the container, hide the image
-                if (
-                    containerRect.y > e.clientY ||
-                    containerRect.bottom < e.clientY ||
-                    containerRect.x > e.clientX ||
-                    containerRect.right < e.clientX
-                ) {
-                    return gsap.to(imageContainer.current, {
-                        duration: 0.3,
-                        opacity: 0,
-                    });
-                }
 
                 gsap.to(imageContainer.current, {
                     y: offsetTop - imageRect.height / 2,
@@ -65,10 +52,21 @@ const ProjectList = () => {
                 });
             }) as any;
 
-            window.addEventListener('mousemove', handleMouseMove);
+            const handleMouseLeave = contextSafe?.(() => {
+                if (imageContainer.current) {
+                    gsap.to(imageContainer.current, {
+                        duration: 0.3,
+                        opacity: 0,
+                    });
+                }
+            }) as any;
+
+            container.addEventListener('mousemove', handleMouseMove);
+            container.addEventListener('mouseleave', handleMouseLeave);
 
             return () => {
-                window.removeEventListener('mousemove', handleMouseMove);
+                container.removeEventListener('mousemove', handleMouseMove);
+                container.removeEventListener('mouseleave', handleMouseLeave);
             };
         },
         { scope: containerRef, dependencies: [containerRef.current] },

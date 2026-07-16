@@ -1,7 +1,6 @@
 'use client';
 import ArrowAnimation from '@/components/ArrowAnimation';
 import Button from '@/components/Button';
-import Lanyard from '@/components/Lanyard/Lanyard';
 import { GENERAL_INFO } from '@/lib/data';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
@@ -9,6 +8,17 @@ import { ScrollTrigger } from 'gsap/all';
 import React from 'react';
 import ElasticLine from '@/components/fancy/physics/elastic-line';
 import Letter3DSwap from '@/components/fancy/text/letter-3d-swap';
+import dynamic from 'next/dynamic';
+
+const Lanyard = dynamic(() => import('@/components/Lanyard/Lanyard'), {
+    ssr: false,
+    loading: () => (
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 flex items-center justify-center pointer-events-none">
+            <div className="size-8 border-t-2 border-primary border-solid rounded-full animate-spin" />
+        </div>
+    )
+});
+
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const Banner = () => {

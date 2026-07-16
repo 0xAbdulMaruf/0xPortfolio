@@ -22,8 +22,16 @@ const Skills = () => {
                     showGradient={false}
                 >
                     {/* Screen Content - macOS Glossy Style */}
-                    <div className="w-full h-full bg-[url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop')] bg-cover bg-center p-2 sm:p-6 flex flex-col relative overflow-hidden">
-                        <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]"></div>
+                    <div className="w-full h-full p-2 sm:p-6 flex flex-col relative overflow-hidden">
+                        <Image
+                            src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop"
+                            alt="macOS Wallpaper"
+                            fill
+                            sizes="(max-width: 768px) 100vw, 1200px"
+                            className="object-cover object-center z-0"
+                            priority={false}
+                        />
+                        <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px] z-10"></div>
                         
                         {/* macOS Top Bar */}
                         <div className="w-full h-6 bg-white/10 backdrop-blur-2xl border-b border-white/20 flex items-center px-4 justify-between absolute top-0 left-0 z-20 shadow-sm">
@@ -42,9 +50,9 @@ const Skills = () => {
                                 <span className="text-[10px] text-white font-medium font-sans tracking-wide">Tue 9:41 AM</span>
                             </div>
                         </div>
-
+ 
                         {/* Content Area */}
-                        <div className="mt-8 flex-1 flex flex-col justify-center z-10 pb-4">
+                        <div className="mt-8 flex-1 flex flex-col justify-center relative z-20 pb-4">
                             <div className="max-w-[98%] mx-auto grid grid-cols-2 gap-3 w-full">
                                 {Object.entries(MY_STACK).map(([category, skills]) => (
                                     <div key={category} className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl p-3 shadow-[0_8px_32px_rgba(0,0,0,0.3)] relative overflow-hidden">

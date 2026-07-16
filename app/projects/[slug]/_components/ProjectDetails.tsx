@@ -9,6 +9,7 @@ import { ScrollTrigger } from 'gsap/all';
 import { ArrowLeft, ExternalLink } from 'lucide-react';
 import { IconBrandGithub } from '@tabler/icons-react';
 import { useRef } from 'react';
+import Image from 'next/image';
 
 interface Props {
     project: IProject;
@@ -183,18 +184,20 @@ const ProjectDetails = ({ project }: Props) => {
                     {project.images.map((image) => (
                         <div
                             key={image}
-                            className="group relative w-full aspect-[750/400] bg-background-light"
-                            style={{
-                                backgroundImage: `url(${image})`,
-                                backgroundSize: 'cover',
-                                backgroundPosition: 'center 50%',
-                                backgroundRepeat: 'no-repeat',
-                            }}
+                            className="group relative w-full aspect-[750/400] bg-background-light overflow-hidden"
                         >
+                            <Image
+                                src={image}
+                                alt={project.title}
+                                fill
+                                sizes="(max-width: 800px) 100vw, 800px"
+                                className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                                loading="lazy"
+                            />
                             <a
                                 href={image}
                                 target="_blank"
-                                className="absolute top-4 right-4 bg-background/70 text-foreground size-12 inline-flex justify-center items-center transition-all opacity-0 hover:bg-primary hover:text-primary-foreground group-hover:opacity-100"
+                                className="absolute top-4 right-4 bg-background/70 text-foreground size-12 inline-flex justify-center items-center transition-all opacity-0 hover:bg-primary hover:text-primary-foreground group-hover:opacity-100 z-10"
                             >
                                 <ExternalLink />
                             </a>
