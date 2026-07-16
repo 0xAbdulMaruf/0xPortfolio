@@ -227,9 +227,28 @@
             "name": "EC-Council",
             "logo": "/certificates/logos/eccouncil.svg",
             "color": "#E31837"
+        },
+        {
+            "name": "Cisco",
+            "logo": "/certificates/logos/cisco.svg",
+            "color": "#8ff0a4"
+        },
+        {
+            "name": "Amazon",
+            "logo": "/certificates/logos/amazon.svg",
+            "color": "#f9f06b"
         }
     ],
     "CERTIFICATES": [
+        {
+            "title": "Getting Started with Cisco Packet Tracer",
+            "company": "Cisco",
+            "category": "Network",
+            "date": "16/07/2026",
+            "image": "/certificates/cert/Getting_Started_with_Cisco_Packet_Tracer.png",
+            "credentialId": "",
+            "verifyUrl": "#"
+        },
         {
             "title": "Google Cybersecurity Professional",
             "company": "Google",

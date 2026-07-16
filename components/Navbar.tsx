@@ -216,7 +216,7 @@ const Navbar = () => {
                         {
                             title: 'Download CV',
                             icon: <Download className="h-full w-full text-neutral-300" />,
-                            href: '/0xAbdulMaruF.pdf',
+                            href: '/0xAbdulMaruf.pdf',
                         },
                     ]}
                 />
